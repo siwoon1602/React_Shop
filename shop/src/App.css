@@ -8,7 +8,18 @@
 .nav-bar {
   background-color: aliceblue;
 }
-
+.loading {
+  position: absolute;
+  width: 1920px;
+  height: 1020px;
+  background-color: black in;
+  top: 25%;
+  left: 25%;
+  font-size: 120px;
+}
+.loadig p {
+  color: white;
+}
 @media screen and (max-width: 600px) {
   .colum {
     display: flex;

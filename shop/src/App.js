@@ -4,17 +4,17 @@ import "./App.css";
 import { useState } from "react";
 import data from "./data";
 import Product from "./components/Product";
-import { Routes, Route, Link, useNavigate, Outlet } from "react-router-dom";
+import { Routes, Route, useNavigate, Outlet } from "react-router-dom";
 import Detail from "./components/Detail";
 import About from "./components/About";
 import styled from "styled-components";
 
-let YellowBtn = styled.button`
-  background: yellow;
-  color: black;
-  padding: 10px;
+let Tap = styled.a`
+  color: white;
 `;
 let Box = styled.div`
+  display: flex;
+  gap: 20px;
   background: grey;
   padding: 20px;
 `;
@@ -25,9 +25,6 @@ function App() {
   return (
     <>
       <div className="App">
-        <Box>
-          <YellowBtn></YellowBtn>
-        </Box>
         <Navbar bg="light" variant="light">
           <Container>
             <Navbar.Brand href="#home">ShoeShop</Navbar.Brand>
