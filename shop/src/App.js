@@ -1,13 +1,14 @@
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Nav, Navbar, Container, Col, Row } from "react-bootstrap";
 import "./App.css";
-import { useState } from "react";
+import { useState, createContext } from "react";
 import data from "./data";
 import Product from "./components/Product";
 import { Routes, Route, useNavigate, Outlet } from "react-router-dom";
 import Detail from "./components/Detail";
 import About from "./components/About";
 import styled from "styled-components";
+import Cart from "./components/Cart";
 
 let Tap = styled.a`
   color: white;
@@ -18,6 +19,8 @@ let Box = styled.div`
   background: grey;
   padding: 20px;
 `;
+
+export const Context = createContext();
 
 function App() {
   let [shoes] = useState(data);
@@ -60,7 +63,15 @@ function App() {
               </>
             }
           ></Route>
-          <Route path="/detail/:id" element={<Detail />}></Route>
+          <Route
+            path="/detail/:id"
+            element={
+              <Context.Provider value={shoes}>
+                <Detail />
+              </Context.Provider>
+            }
+          ></Route>
+          <Route path="/cart" element={<Cart />} />
           <Route path="/about" element={<About />}>
             <Route path="member" element={<div>멤버임</div>} />
             <Route path="location" element={<div>위치정보임</div>} />
