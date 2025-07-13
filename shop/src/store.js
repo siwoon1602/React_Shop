@@ -29,6 +29,12 @@ let data = createSlice({
         alert("장바구니에 제품을 추가하였습니다!");
       }
     },
+
+    deleteProduct(state, action) {
+      const index = state.findIndex((item) => item.id === action.payload);
+      state.splice(index, 1);
+      alert("장바구니에서 상품이 삭제되었습니다.");
+    },
   },
 });
 
@@ -42,7 +48,8 @@ let user = createSlice({
   },
 });
 
-export let { plusStock, minusStock, cartInProdcut } = data.actions;
+export let { plusStock, minusStock, cartInProdcut, deleteProduct } =
+  data.actions;
 export let { plusAge } = user.actions;
 
 export default configureStore({

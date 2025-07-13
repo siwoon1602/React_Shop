@@ -1,7 +1,7 @@
 import React from "react";
 import { Table } from "react-bootstrap";
 import { useSelector, useDispatch } from "react-redux";
-import { plusStock, minusStock } from "../store";
+import { plusStock, minusStock, deleteProduct } from "../store";
 import { plusAge } from "../store";
 
 export default function Cart() {
@@ -37,23 +37,34 @@ export default function Cart() {
           </tr>
         </thead>
         <tbody>
-          {a.map((item) => {
-            return (
-              <tr>
-                <td>{item.id}</td>
-                <td>{item.name}</td>
-                <td>{item.count}</td>
-                <td>
-                  <button onClick={() => dispatch(plusStock(item.id))}>
-                    +
-                  </button>
-                  <button onClick={() => dispatch(minusStock(item.id))}>
-                    -
-                  </button>
-                </td>
-              </tr>
-            );
-          })}
+          {a.length === 0 ? (
+            <div style={{ textAlign: "center", marginTop: "20px" }}>
+              장바구니가 비어있습니다
+            </div>
+          ) : (
+            a.map((item) => {
+              return (
+                <tr>
+                  <td>{item.id}</td>
+                  <td>{item.name}</td>
+                  <td>{item.count}</td>
+                  <td>
+                    <button onClick={() => dispatch(plusStock(item.id))}>
+                      +
+                    </button>
+                    <button onClick={() => dispatch(minusStock(item.id))}>
+                      -
+                    </button>
+                  </td>
+                  <td>
+                    <button onClick={() => dispatch(deleteProduct(item.id))}>
+                      삭제
+                    </button>
+                  </td>
+                </tr>
+              );
+            })
+          )}
         </tbody>
       </Table>
     </>
