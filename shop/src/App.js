@@ -30,7 +30,7 @@ function App() {
       <div className="App">
         <Navbar bg="light" variant="light">
           <Container>
-            <Navbar.Brand href="#home">ShoeShop</Navbar.Brand>
+            <Navbar.Brand href="/">ShoeShop</Navbar.Brand>
             <Nav className="me-auto">
               <Nav.Link
                 onClick={() => {
@@ -45,6 +45,13 @@ function App() {
                 }}
               >
                 Detail
+              </Nav.Link>
+              <Nav.Link
+                onClick={() => {
+                  navigate("/cart");
+                }}
+              >
+                Cart
               </Nav.Link>
             </Nav>
           </Container>

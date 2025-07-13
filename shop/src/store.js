@@ -19,13 +19,35 @@ let data = createSlice({
         item.count--;
       }
     },
+    cartInProdcut(state, action) {
+      const existingItem = state.find((item) => item.id === action.payload.id);
+      if (existingItem) {
+        existingItem.count += 1;
+        alert("장바구니에 제품을 추가하였습니다!");
+      } else {
+        state.push(action.payload);
+        alert("장바구니에 제품을 추가하였습니다!");
+      }
+    },
   },
 });
 
-export let { plusStock, minusStock } = data.actions;
+let user = createSlice({
+  name: "user",
+  initialState: { user: "Siwoon", age: 29 },
+  reducers: {
+    plusAge(state, action) {
+      state.age += action.payload;
+    },
+  },
+});
+
+export let { plusStock, minusStock, cartInProdcut } = data.actions;
+export let { plusAge } = user.actions;
 
 export default configureStore({
   reducer: {
     data: data.reducer,
+    user: user.reducer,
   },
 });

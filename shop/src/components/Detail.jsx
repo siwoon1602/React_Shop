@@ -1,9 +1,13 @@
 import React, { useEffect, useState } from "react";
 import { Nav } from "react-bootstrap";
-
-import { useParams, useLocation } from "react-router-dom";
+import { cartInProdcut } from "../store";
+import { useParams, useLocation, useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
 
 export default function Detail() {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
   let [alert, setAlert] = useState(true);
   let [count, setCount] = useState(0);
   let [value, setValue] = useState(0);
@@ -49,7 +53,21 @@ export default function Detail() {
             <h4 className="pt-5">{productNo.title}</h4>
             <p>{productNo.content}</p>
             <p>{productNo.price}</p>
-            <button className="btn btn-danger">주문하기</button>
+            <button
+              className="btn btn-danger"
+              onClick={() => {
+                dispatch(
+                  cartInProdcut({
+                    id: productNo.id,
+                    name: productNo.title,
+                    count: 1,
+                  })
+                );
+                navigate("/cart");
+              }}
+            >
+              주문하기
+            </button>
             <input
               type="text"
               onChange={(e) => {
