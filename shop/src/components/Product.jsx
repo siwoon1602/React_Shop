@@ -8,12 +8,22 @@ import { Link, useNavigate } from "react-router-dom";
 export default function Product() {
   let [itemData, setItemData] = useState(data);
   let navigate = useNavigate();
+
+  const saveProduct = (item) => {
+    const recent = JSON.parse(localStorage.getItem("recentProducts")) || [];
+    const exists = recent.find((p) => p.id === item.id);
+    if (!exists) {
+      recent.push(item);
+      localStorage.setItem("recentProducts", JSON.stringify(recent));
+    }
+  };
   return (
     <>
       {itemData.map((item) => (
         <Col
           key={item.id}
           onClick={() => {
+            saveProduct(item);
             navigate(`/detail/${item.id}`, { state: { item: item } });
           }}
         >
