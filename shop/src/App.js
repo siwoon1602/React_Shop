@@ -9,6 +9,9 @@ import Detail from "./components/Detail";
 import About from "./components/About";
 import styled from "styled-components";
 import Cart from "./components/Cart";
+import RecentProducts from "./components/RecentProducts";
+import { useQuery } from "react-query";
+import axios from "axios";
 
 let Tap = styled.a`
   color: white;
@@ -23,12 +26,19 @@ let Box = styled.div`
 export const Context = createContext();
 
 function App() {
+  const result = useQuery("name", () =>
+    axios.get("https://codingapple1.github.io/userdata.json").then((a) => {
+      return a.data;
+    })
+  );
+
+  console.log(result);
   let [shoes] = useState(data);
   let navigate = useNavigate();
   return (
     <>
       <div className="App">
-        <Navbar bg="light" variant="light">
+        <Navbar bg="light" variant="light" className="navBar">
           <Container>
             <Navbar.Brand href="/">ShoeShop</Navbar.Brand>
             <Nav className="me-auto">
@@ -54,8 +64,14 @@ function App() {
                 Cart
               </Nav.Link>
             </Nav>
+            <Nav>
+              반가워요{" "}
+              {result.isLoading ? <div>Loading...</div> : result.data.name}
+            </Nav>
           </Container>
         </Navbar>
+
+        <RecentProducts></RecentProducts>
         <Routes>
           <Route
             path="/"
