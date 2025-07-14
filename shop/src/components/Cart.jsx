@@ -3,8 +3,15 @@ import { Table } from "react-bootstrap";
 import { useSelector, useDispatch } from "react-redux";
 import { plusStock, minusStock, deleteProduct } from "../store";
 import { plusAge } from "../store";
+import { useState, memo } from "react";
 
-export default function Cart() {
+const Child = memo(function () {
+  console.log("Child");
+  return <div>Child</div>;
+});
+
+function Cart() {
+  const [count, setCount] = useState(0);
   const a = useSelector((state) => {
     return state.data;
   });
@@ -17,6 +24,8 @@ export default function Cart() {
 
   return (
     <>
+      <Child count={count} />
+      <button onClick={() => setCount(count + 1)}>+</button>
       <h3 style={{ textAlign: "center" }}>
         {user.user} {user.age}세 의 장바구니{" "}
         <button
@@ -70,3 +79,5 @@ export default function Cart() {
     </>
   );
 }
+
+export default Cart;

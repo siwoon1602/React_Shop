@@ -21,10 +21,6 @@
   color: white;
 }
 
-.navBar {
-  position: fixed;
-  width: 100%;
-}
 @media screen and (max-width: 600px) {
   .colum {
     display: flex;
